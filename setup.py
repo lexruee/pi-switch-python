@@ -6,12 +6,12 @@ from distutils.extension import Extension
 setup(
     name="pi_switch",
     packages = [ "pi_switch" ],
-    version = "0.1.1",
+    version = "0.1.5",
     description = "A library for the raspberry pi to control remote power outlet sockets.",
     author = "Alexander Rueedlinger",
     author_email = "a.rueedlinger@gmail.com",
     url = "https://github.com/lexruee/pi-switch-python",
-    #download_url = "https://github.com/lexruee/pi-switch-python/tarball/0.1",
+    download_url = "https://github.com/lexruee/pi-switch-python/tarball/0.1.5",
     keywords = ['switch', 'outlet sockets', 'control', 'remote', 'raspberry pi'],
     classifiers = [
         "License :: OSI Approved :: GNU General Public License v2 (GPLv2)"
@@ -22,4 +22,6 @@ setup(
                         "pi_switch/wrapper/pi_switch.cpp"
                     ],
                     libraries = ["boost_python", "wiringPi"])
-    ])
+    ],
+    install_requires = [],
+    )

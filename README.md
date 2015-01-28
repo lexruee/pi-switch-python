@@ -2,13 +2,17 @@
 
 Pi Switch is a library for controlling 315/433MHz remote power outlet sockets.
 
-Pi Switch is a port of the [rc-switch](http://code.google.com/p/rc-switch/) library
+This library is a port of the [rc-switch](http://code.google.com/p/rc-switch/) library
 for the Raspberry Pi and Python Programming Language.
 
-
-
 ## Installation
-First we need to install [wiring pi](http://wiringpi.com/download-and-install/):
+Overall we need to install the following necessary dependencies:
+
+- wiringPi
+- python boost
+- python-dev header files
+
+Install [wiring pi](http://wiringpi.com/download-and-install/):
 
 ```bash
 git clone git://git.drogon.net/wiringPi
@@ -19,36 +23,98 @@ cd wiringPi
 ./build
 ```
 
-In a next step we run pip:
+In a next step please update your Raspberry Pi:
+
+```bash
+sudo apt-get update
 ```
+
+Install python boost and the python header files:
+
+```bash
+sudo apt-get install python-dev libboost-python-dev
+```
+
+Finally, we install it ```pi_switch``` using pip:
+
+```bash
 sudo pip install pi_switch
 ```
 
-## Building from source
+## Usage
 
-Install all necessary dependencies:
+Known devices that seem to work are listed on the [rc-switch wiki](http://code.google.com/p/rc-switch/wiki/List_KnownDevices).
 
-  - wiringPi
-  - python boost
-  - python-dev header files
+This library uses the wiring pi pin [mapping](http://wiringpi.com/pins/).
+Example: WiringPi Pin 0 <=> BCM GPIO17 <=> Header Pin 11
 
-### WiringPi
-```bash
-  git clone git://git.drogon.net/wiringPi
+### Switch Type A
+
+NOTE: NOT tested!
+
+```python
+import pi_switch
+
+# DIP switches 1..5 where "1" = on and "0" = off,
+# if all DIP switches are on it's "11111"
+first = "11111"
+
+# DIP switches 6..10 (A..E) where "1" = on and "0" = off,
+# if all DIP switches are on it's "11111"
+second = "11111"
+
+switch = pi_switch.RCSwitchA(first, second)
+switch.enableTransmit(0) # use gpio pin 0 <=> GPIO17
+
+switch.switchOn()
+switch.switchOff()
 ```
 
-```bash
-  cd wiringPi
-  ./build
+### Switch Type B
+NOTE: Tested and works!
+
+```python
+import pi_switch
+
+address_group = 1 # Address group (1..4)
+channel = 2 # Channel (1..4)
+
+switch = rc_switch.RCSwitchB(address_group, channel)
+switch.enableTransmit(0) # use gpio pin 0 <=> GPIO17
+
+switch.switchOn()
+switch.switchOff()
 ```
 
-### Python-dev / Python boost
-```bash
- sudo apt-get install python-dev libboost-python-dev
+### Switch Type C
+NOTE: Not tested!
+
+```python
+import pi_switch
+
+family_code = "a" # Familycode (a..f)
+group = 1 # Number of group (1..4)
+device = 1 # Number of device (1..4)
+
+switch = pi_switch.RCSwitchC(family_code, group, device) #address group 1, channel 2
+switch.enableTransmit(0) # use gpio pin 0 <=> GPIO17
+
+switch.switchOn()
+switch.switchOff()
 ```
 
-Run the build script:
+### Switch Type D
+NOTE: Not tested!
 
-```bash
- python setup.py build
+```python
+import pi_switch
+
+group = "A" # Code of the switch group (A,B,C,D)
+device = 1 # Number of the switch itself (1..3)
+
+switch = pi_switch.RCSwitchD(group, device) #address group 1, channel 2
+switch.enableTransmit(0) # use gpio pin 0 <=> GPIO17
+
+switch.switchOn()
+switch.switchOff()
 ```
