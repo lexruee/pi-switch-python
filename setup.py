@@ -17,9 +17,9 @@ setup(
         "License :: OSI Approved :: GNU General Public License v2 (GPLv2)"
     ],
     ext_modules = [
-        Extension("pi_switch",
+        Extension("pi_switch_wrapper",
                     sources = [
-                        "pi_switch.cpp"
+                        "pi_switch/wrapper/pi_switch.cpp"
                     ],
                     libraries = ["boost_python", "wiringPi"])
     ])

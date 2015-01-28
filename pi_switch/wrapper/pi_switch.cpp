@@ -28,7 +28,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include <boost/python/wrapper.hpp>
 #include <boost/python/call.hpp>
 
-#include "pi_switch/RCSwitch/PiSwitch.cpp"
+#include "RCSwitch/PiSwitch.cpp"
 
 // use boost namespace to avoid lot of typing :-)
 using namespace boost::python;
@@ -46,7 +46,7 @@ struct RCSwitchProxyWrap: RCSwitchProxy, wrapper<RCSwitchProxy> {
 };
 
 
-BOOST_PYTHON_MODULE(pi_switch) {
+BOOST_PYTHON_MODULE(pi_switch_wrapper) {
   wiringPiSetup();
 
   // map RCSwitchProxy class
