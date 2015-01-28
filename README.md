@@ -6,7 +6,7 @@ This library is a port of the [rc-switch](http://code.google.com/p/rc-switch/) l
 for the Raspberry Pi and Python Programming Language.
 
 ## Installation
-Overall we need to install the following necessary dependencies:
+We need to install the following dependencies:
 
 - wiringPi
 - python boost
@@ -35,7 +35,7 @@ Install python boost and the python header files:
 sudo apt-get install python-dev libboost-python-dev
 ```
 
-Finally, we install it ```pi_switch``` using pip:
+Finally, we install ```pi_switch``` using pip:
 
 ```bash
 sudo pip install pi_switch
@@ -46,6 +46,7 @@ sudo pip install pi_switch
 Known devices that seem to work are listed on the [rc-switch wiki](http://code.google.com/p/rc-switch/wiki/List_KnownDevices).
 
 This library uses the wiring pi pin [mapping](http://wiringpi.com/pins/).
+
 Example: WiringPi Pin 0 <=> BCM GPIO17 <=> Header Pin 11
 
 ### Switch Type A
