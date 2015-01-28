@@ -18,6 +18,8 @@ setup(
     ],
     ext_modules = [
         Extension("pi_switch",
-                    sources = ["source/pi_switch.cpp"],
+                    sources = [
+                        "pi_switch.cpp"
+                    ],
                     libraries = ["boost_python", "wiringPi"])
     ])
