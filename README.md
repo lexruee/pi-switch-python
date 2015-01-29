@@ -45,6 +45,44 @@ Finally, we install ```pi_switch``` using pip:
 sudo pip install pi_switch
 ```
 
+## Building from source
+Please check that all dependencies are installed. See section `Installation`.
+
+```bash
+git clone https://github.com/lexruee/pi-switch-python.git
+```
+
+```bash
+cd pi-switch-python
+```
+
+### Testing
+If you just want to test it run the build command:
+
+```bash
+sudo python setup.py build
+```
+
+Change the directory:
+```bash
+cd build/lib.linux-armv6l-2.7
+```
+
+Run python and import ```pi_switch```:
+```bash
+sudo python
+```
+
+### Installation
+Install it:
+
+```bash
+sudo python setup.py install
+```
+
+
+
+
 ## Usage
 
 Known devices that seem to work are listed on the [rc-switch wiki](http://code.google.com/p/rc-switch/wiki/List_KnownDevices).
