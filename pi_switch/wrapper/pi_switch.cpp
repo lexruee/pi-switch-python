@@ -51,6 +51,18 @@ struct RCSwitchProxyWrap: RCSwitchProxy, wrapper<RCSwitchProxy> {
 BOOST_PYTHON_MODULE(pi_switch_wrapper) {
   wiringPiSetup();
 
+  // map RCSwitchSender class
+  void (RCSwitchSender::*send)(std::string) = &RCSwitchSender::send;
+  void (RCSwitchSender::*setProtocol)(int) = &RCSwitchSender::setProtocol;
+  class_<RCSwitchSender>("RCSwitchSender")
+    .def("sendTriState", &RCSwitchSender::sendTriState)
+    .def("send", send)
+    .def("enableTransmit", &RCSwitchSender::enableTransmit)
+    .def("disableTransmit", &RCSwitchSender::disableTransmit)
+    .def("sendPulseLength", &RCSwitchSender::setPulseLength)
+    .def("setRepeatTransmit", &RCSwitchSender::setRepeatTransmit)
+    .def("setProtocol", setProtocol);
+
   // map RCSwitchProxy class
   class_<RCSwitchProxyWrap,boost::noncopyable>("RCSwitchProxy")
     .def("switchOn", pure_virtual(&RCSwitchProxy::switchOn))
