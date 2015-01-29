@@ -45,9 +45,12 @@ sudo pip install pi_switch
 
 Known devices that seem to work are listed on the [rc-switch wiki](http://code.google.com/p/rc-switch/wiki/List_KnownDevices).
 
-This library uses the wiring pi pin [mapping](http://wiringpi.com/pins/).
+Pi Switch uses the wiringPi library and the wiringPi pin [mapping](http://wiringpi.com/pins/).
+
+Programs that use pi_switch must be run with sudo.
 
 Example: WiringPi Pin 0 <=> BCM GPIO17 <=> Header Pin 11
+
 
 ### Switch Type A
 
