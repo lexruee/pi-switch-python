@@ -59,7 +59,7 @@ BOOST_PYTHON_MODULE(pi_switch_wrapper) {
     .def("send", send)
     .def("enableTransmit", &RCSwitchSender::enableTransmit)
     .def("disableTransmit", &RCSwitchSender::disableTransmit)
-    .def("sendPulseLength", &RCSwitchSender::setPulseLength)
+    .def("setPulseLength", &RCSwitchSender::setPulseLength)
     .def("setRepeatTransmit", &RCSwitchSender::setRepeatTransmit)
     .def("setProtocol", setProtocol);
 
