@@ -2,8 +2,8 @@
 
 Pi Switch is a library for controlling 315/433MHz remote power outlet sockets.
 
-This library is a port of the [rc-switch](http://code.google.com/p/rc-switch/) library
-for the Raspberry Pi and Python Programming Language.
+This library is a port of the Arduino [rc-switch](http://code.google.com/p/rc-switch/) library
+for the Raspberry Pi and the Python Programming Language.
 
 ## Installation
 We need to install the following dependencies:
@@ -47,10 +47,52 @@ Known devices that seem to work are listed on the [rc-switch wiki](http://code.g
 
 Pi Switch uses the wiringPi library and the wiringPi pin [mapping](http://wiringpi.com/pins/).
 
+Example:
+
+```
+WiringPi Pin 0 <=> BCM GPIO17 <=> Header Pin 11
+```
+
 Programs that use pi_switch must be run with sudo.
 
-Example: WiringPi Pin 0 <=> BCM GPIO17 <=> Header Pin 11
+### Example program
+```python
+""" A program that toggles three light switches """
+import time
+import pi_switch
 
+def create_switch(addr, channel):
+  """creates a switch of type B"""
+  switch = pi_switch.RCSwitchB(addr, channel)
+  switch.enableTransmit(0)
+  return switch
+
+
+def toggle(switch):
+  """toggles a switch on and off"""
+  switch.switchOn()
+  time.sleep(1)
+  switch.switchOff()
+  time.sleep(1)
+
+
+switches = [[1,1],[1,2],[1,3]]
+switches = [ create_switch(p,q) for (p,q) in switches ]
+
+while True:
+  for switch in switches:
+    toggle(switch)
+```
+
+
+## Switch Types
+
+There are 4 kind of [switch types](http://code.google.com/p/rc-switch/wiki/HowTo_OperateLowCostOutlets) according the rc-switch wiki.
+
+ * Type A - 10 pole DIP switches
+ * Type B - Two rotary/sliding switches
+ * Type C -  Intertechno
+ * Type D
 
 ### Switch Type A
 
@@ -122,3 +164,7 @@ switch.enableTransmit(0) # use gpio pin 0 <=> GPIO17
 switch.switchOn()
 switch.switchOff()
 ```
+
+## Disclaimer
+I'm not responsible for any hardware damages or other accidents.
+You use this library at your own risk.
