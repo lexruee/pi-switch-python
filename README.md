@@ -64,7 +64,7 @@ import pi_switch
 def create_switch(addr, channel):
   """creates a switch of type B"""
   switch = pi_switch.RCSwitchB(addr, channel)
-  switch.enableTransmit(0)
+  switch.enableTransmit(0) # use WiringPi pin 0 <=> GPIO17
   return switch
 
 
@@ -110,7 +110,7 @@ first = "11111"
 second = "11111"
 
 switch = pi_switch.RCSwitchA(first, second)
-switch.enableTransmit(0) # use gpio pin 0 <=> GPIO17
+switch.enableTransmit(0) # use WiringPi pin 0 <=> GPIO17
 
 switch.switchOn()
 switch.switchOff()
@@ -126,7 +126,7 @@ address_group = 1 # Address group (1..4)
 channel = 2 # Channel (1..4)
 
 switch = rc_switch.RCSwitchB(address_group, channel)
-switch.enableTransmit(0) # use gpio pin 0 <=> GPIO17
+switch.enableTransmit(0) # use WiringPi pin 0 <=> GPIO17
 
 switch.switchOn()
 switch.switchOff()
@@ -143,7 +143,7 @@ group = 1 # Number of group (1..4)
 device = 1 # Number of device (1..4)
 
 switch = pi_switch.RCSwitchC(family_code, group, device) #address group 1, channel 2
-switch.enableTransmit(0) # use gpio pin 0 <=> GPIO17
+switch.enableTransmit(0) # use WiringPi pin 0 <=> GPIO17
 
 switch.switchOn()
 switch.switchOff()
@@ -159,7 +159,7 @@ group = "A" # Code of the switch group (A,B,C,D)
 device = 1 # Number of the switch itself (1..3)
 
 switch = pi_switch.RCSwitchD(group, device) #address group 1, channel 2
-switch.enableTransmit(0) # use gpio pin 0 <=> GPIO17
+switch.enableTransmit(0) # use WiringPi pin 0 <=> GPIO17
 
 switch.switchOn()
 switch.switchOff()
@@ -167,4 +167,5 @@ switch.switchOff()
 
 ## Disclaimer
 I'm not responsible for any hardware damages or other accidents.
+
 You use this library at your own risk.
