@@ -5,6 +5,9 @@
 This library is a port of the Arduino [rc-switch](http://code.google.com/p/rc-switch/) library
 for the Raspberry Pi and the Python Programming Language.
 
+## Credits
+Thanks to Gordon Henderson for [WiringPi](http://wiringpi.com/) and the [rc-switch](http://code.google.com/p/rc-switch/) for the effort for developing such cool libraries!
+
 ## Installation
 We need to install the following dependencies:
 
