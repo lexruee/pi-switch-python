@@ -1,6 +1,6 @@
 # Pi Switch
 
-Pi Switch is a library for controlling 315/433MHz remote power outlet sockets.
+[Pi Switch](https://pypi.python.org/pypi/pi_switch/) is a library for controlling 315/433MHz remote power outlet sockets.
 
 This library is a port of the Arduino [rc-switch](http://code.google.com/p/rc-switch/) library
 for the Raspberry Pi and the Python Programming Language.
@@ -11,6 +11,7 @@ We need to install the following dependencies:
 - wiringPi
 - python boost
 - python-dev header files
+- python-pip
 
 Install [wiring pi](http://wiringpi.com/download-and-install/):
 
@@ -29,10 +30,10 @@ In a next step please update your Raspberry Pi:
 sudo apt-get update
 ```
 
-Install python boost and the python header files:
+Install python boost, python header files and python-pip:
 
 ```bash
-sudo apt-get install python-dev libboost-python-dev
+sudo apt-get install python-dev libboost-python-dev python-pip
 ```
 
 Finally, we install ```pi_switch``` using pip:
