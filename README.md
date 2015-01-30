@@ -138,8 +138,8 @@ For more details see the [rc-switch](https://code.google.com/p/rc-switch/wiki/Ho
 ```python
 import pi_switch
 sender = pi_switch.RCSwitchSender()
-send.enableTransmit(0) # use WiringPi pin 0
-send.send("01001000001010000000010100000000")
+sender.enableTransmit(0) # use WiringPi pin 0
+sender.send("01001000001010000000010100000000")
 ```
 
 ### Send tri-state string
