@@ -126,6 +126,39 @@ while True:
     toggle(switch)
 ```
 
+## RCSwitchSender
+
+The `RCSwitchSender` class provides low level methods to send binary
+or tri-state strings.
+
+For more details see the [rc-switch](https://code.google.com/p/rc-switch/wiki/HowTo_Send) wiki.
+
+### Send binary string
+
+```python
+import pi_switch
+sender = pi_switch.RCSwitchSender()
+send.enableTransmit(0) # use WiringPi pin 0
+send.send("01001000001010000000010100000000")
+```
+
+### Send tri-state string
+
+```python
+import pi_switch
+sender = pi_switch.RCSwitchSender()
+sender.enableTransmit(0) # use WiringPi pin 0
+sender.sendTriState("0FFF0FFFFFF1") # switch on
+sender.sendTriState("0FFF0FFFFFF0") # switch off
+```
+
+### RCSwitchSender setter methods
+The default settings of the `RCSwitchSender` can be changed by means of the following setter methods:
+
+  * setProtocol(num)
+  * setPulseLegnth(num)
+  * setRepeatTransmit(num)  
+
 
 ## Switch Types
 
@@ -206,6 +239,18 @@ switch.enableTransmit(0) # use WiringPi pin 0 <=> GPIO17
 switch.switchOn()
 switch.switchOff()
 ```
+
+## Contributing
+Please feel free to contribute or to improve this library (Codebase, Documentation etc.).
+I'm not an expert in this field. I'm just the guy who wrote the glue to port the library for the Python Programming Language :-).
+
+
+1. Fork it ( https://github.com/[my-github-username]/pi-switch-python/fork )
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Commit your changes (`git commit -am 'Add some feature'`)
+4. Push to the branch (`git push origin my-new-feature`)
+5. Create a new Pull Request
+
 
 ## Disclaimer
 I'm not responsible for any hardware damages or other accidents.
