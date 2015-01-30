@@ -3,15 +3,17 @@
 from distutils.core import setup
 from distutils.extension import Extension
 
+VERSION = "0.2.0"
+
 setup(
     name="pi_switch",
     packages = [ "pi_switch" ],
-    version = "0.2.0",
+    version = VERSION,
     description = "A library for the raspberry pi to control remote power outlet sockets.",
     author = "Alexander Rueedlinger",
     author_email = "a.rueedlinger@gmail.com",
     url = "https://github.com/lexruee/pi-switch-python",
-    download_url = "https://github.com/lexruee/pi-switch-python/tarball/0.1.5",
+    download_url = "https://github.com/lexruee/pi-switch-python/tarball/%s" % VERSION,
     keywords = ['switch', 'outlet sockets', 'control', 'remote', 'raspberry pi'],
     classifiers = [
         "License :: OSI Approved :: GNU General Public License v2 (GPLv2)",
