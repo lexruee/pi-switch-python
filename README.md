@@ -97,6 +97,36 @@ WiringPi Pin 0 <=> BCM GPIO17 <=> Header Pin 11
 
 Programs that use pi_switch must be run with sudo.
 
+### send.py
+[send.py](https://github.com/lexruee/pi-switch-python/blob/master/send.py) is a python program to switch power sockets on or off.
+
+It takes the following arguments:
+
+ * command: -c
+ * type: -t
+ * settings: -s
+
+The command argument must be either on or off. Type must be A, B, C or D. Settings must be
+a comma separated list which specifies the family code, group code, address code, channel number or device number.
+
+For more details about the switch types see the [rc-switch](http://code.google.com/p/rc-switch/wiki/HowTo_OperateLowCostOutlets) wiki page.
+
+```bash
+#switch type A:
+sudo python send.py -c off -t A -s 11001,01000 -p 0
+
+#switch type B:
+sudo python send.py -c off -t B -s 1,3 -p 0
+
+#switch type C:
+sudo python send.py -c off -t C -s a,1,1 -p 0
+
+#switch type D:
+sudo python send.py -c off -t D -s A,1 -p 0
+
+```
+
+
 ### Example program
 ```python
 """ A program that toggles three light switches """
