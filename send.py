@@ -1,4 +1,9 @@
 """
+A program to send off / on commands to a remote power socket.
+
+author:     Alexander Rueedlinger <a.rueedlinger@gmail.com>
+date:       02.07.2015
+
 Example:
 
     switch type A:
