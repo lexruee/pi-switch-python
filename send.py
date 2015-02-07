@@ -22,7 +22,7 @@ try:
     import pi_switch
 except ImportError:
     print "pi_switch import error!"
-    #sys.exit()
+    sys.exit()
 
 def create_switch(type, settings, pin):
 	"""Create a switch.
