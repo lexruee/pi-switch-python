@@ -156,13 +156,13 @@ sender.sendTriState("0FFF0FFFFFF0") # switch off
 The default settings of the `RCSwitchSender` can be changed by means of the following setter methods:
 
   * setProtocol(num)
-  * setPulseLegnth(num)
+  * setPulseLength(num)
   * setRepeatTransmit(num)  
 
 
 ## Switch Types
 
-There are 4 kind of [switch types](http://code.google.com/p/rc-switch/wiki/HowTo_OperateLowCostOutlets) according the rc-switch wiki.
+There are 4 kind of [switch types](http://code.google.com/p/rc-switch/wiki/HowTo_OperateLowCostOutlets) according to the rc-switch wiki page.
 
  * Type A - 10 pole DIP switches
  * Type B - Two rotary/sliding switches
@@ -200,7 +200,7 @@ import pi_switch
 address_group = 1 # Address group (1..4)
 channel = 2 # Channel (1..4)
 
-switch = rc_switch.RCSwitchB(address_group, channel)
+switch = pi_switch.RCSwitchB(address_group, channel)
 switch.enableTransmit(0) # use WiringPi pin 0 <=> GPIO17
 
 switch.switchOn()
