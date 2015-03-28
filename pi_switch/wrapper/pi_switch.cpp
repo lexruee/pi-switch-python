@@ -53,9 +53,12 @@ BOOST_PYTHON_MODULE(pi_switch_wrapper) {
 
   // map RCSwitchSender class
   void (RCSwitchSender::*send)(std::string) = &RCSwitchSender::send;
+  void (RCSwitchSender::*sendDecimal)(unsigned long Code, unsigned int length) = &RCSwitchSender::send;
   void (RCSwitchSender::*setProtocol)(int) = &RCSwitchSender::setProtocol;
+  
   class_<RCSwitchSender>("RCSwitchSender")
     .def("sendTriState", &RCSwitchSender::sendTriState)
+    .def("sendDecimal", sendDecimal)
     .def("send", send)
     .def("enableTransmit", &RCSwitchSender::enableTransmit)
     .def("disableTransmit", &RCSwitchSender::disableTransmit)
