@@ -21,6 +21,7 @@ You can contribute to this project by
  * submitting feature requests
 
 
+
 ## Installation
 We need to install the following dependencies:
 
@@ -294,6 +295,13 @@ I'm not an expert in this field. I'm just the guy who wrote the glue to port the
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create a new Pull Request
 
+## Contact
+
+Feel free to send me an email:
+
+```
+a.rueedlinger <at> gmail.com
+```
 
 ## Disclaimer
 I'm not responsible for any hardware damages or other accidents.
