@@ -8,6 +8,19 @@ for the Raspberry Pi and the Python Programming Language.
 ## Credits
 Thanks to Gordon Henderson for [WiringPi](http://wiringpi.com/) and the [rc-switch](http://code.google.com/p/rc-switch/) team for the effort for developing such cool libraries!
 
+## Please contribute!
+Please contribute to this repository. Every contribution counts.
+
+You can contribute to this project by
+ * improving the documentation
+  * circuits figures
+  * arduino / raspberry pi tutorial etc.
+ * starting a github wiki
+ * sending pull requests
+ * reporting bugs
+ * submitting feature requests
+
+
 ## Installation
 We need to install the following dependencies:
 
