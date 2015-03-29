@@ -180,15 +180,18 @@ For more details see the [rc-switch](https://code.google.com/p/rc-switch/wiki/Ho
 ### Send binary string
 
 ```python
+# Type B example: address group = 1, channel = 1
 import pi_switch
 sender = pi_switch.RCSwitchSender()
 sender.enableTransmit(0) # use WiringPi pin 0
-sender.send("01001000001010000000010100000000")
+sender.send("000101010001010101010101") # switch on
+sender.send("000101010001010101010100") # switch off
 ```
 
 ### Send tri-state string
 
 ```python
+# Type B example: address group = 1, channel = 1
 import pi_switch
 sender = pi_switch.RCSwitchSender()
 sender.enableTransmit(0) # use WiringPi pin 0
@@ -207,6 +210,7 @@ sender.enableTransmit(0) # use WiringPi pin 0
 sender.sendDecimal(1381717, 24) # switch on
 sender.sendDecimal(1381716, 24) # switch off
 ```
+
 
 ### RCSwitchSender setter methods
 The default settings of the `RCSwitchSender` can be changed by means of the following setter methods:
