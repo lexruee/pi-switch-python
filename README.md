@@ -200,7 +200,7 @@ sender.sendTriState("0FFF0FFFFFF0") # switch off
 ### Send decimal
 
 ```python
-# Type B example: address group = 1, channel = 2
+# Type B example: address group = 1, channel = 1
 import pi_switch
 sender = pi_switch.RCSwitchSender()
 sender.enableTransmit(0) # use WiringPi pin 0
