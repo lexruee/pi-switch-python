@@ -231,7 +231,7 @@ There are 4 kind of [switch types](http://code.google.com/p/rc-switch/wiki/HowTo
 
 ### Switch Type A
 
-NOTE: NOT tested!
+NOTE: Tested and works!
 
 ```python
 import pi_switch
