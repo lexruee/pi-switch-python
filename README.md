@@ -268,7 +268,7 @@ switch.switchOff()
 ```
 
 ### Switch Type C
-NOTE: Not tested!
+NOTE: Tested and works! Please make sure to send a 'on' sequence within the first five seconds the switch is plugged. This enables the switch to recognize the family code.
 
 ```python
 import pi_switch
