@@ -1,5 +1,7 @@
 # Pi Switch
 
+[![PyPI](https://img.shields.io/pypi/v/pi_switch.svg)]()
+
 [Pi Switch](https://pypi.python.org/pypi/pi_switch/) is a library for controlling 315/433MHz remote power outlet sockets.
 
 This library is a port of the Arduino [rc-switch](http://code.google.com/p/rc-switch/) library
