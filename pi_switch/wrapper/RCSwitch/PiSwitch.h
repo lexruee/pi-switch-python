@@ -38,7 +38,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // return error code
 #define WIRINGPI_CODES		1
 
-// necessary vales to port rc-switch to the raspberry pi
+// necessary values to port rc-switch to the raspberry pi
 #ifndef boolean
 #define boolean int
 #endif
