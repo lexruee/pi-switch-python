@@ -9,6 +9,9 @@ PiSwitch.o:
 	
 test: test.cpp
 	$(CC) test.cpp -o test.o $(LDFLAGS)
+	
+test: test_receive.cpp
+	$(CC) test_receive.cpp -o test_receive.o $(LDFLAGS)
 
 clean:
 	rm *.o

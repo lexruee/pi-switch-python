@@ -52,12 +52,18 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #endif
 
 #ifndef CHANGE
-#define CHANGE 0
+#define CHANGE INT_EDGE_BOTH
 #endif
 
-// replace functions that are not available with mock functions
+// replace detachInterrupt() with a empty block
 #define detachInterrupt(x) do { } while(0)
-#define attachInterrupt(x,y,z) do { } while(0)
+
+// map attachInterrupt() to wiringPi equivalent
+#define attachInterrupt(pin, edgeType, handler)		\
+		do {	 									\
+			wiringPiISR(pin, handler, edgeType);	\
+		} while(0)									\
+
 
 #include "RCSwitch.h"
 #include <string>
@@ -94,6 +100,19 @@ class RCSwitchSender {
 		void setProtocol(int nProtocol);
 		void setProtocol(int nProtocol, int nPulseLength);
 
+	protected:
+		RCSwitch *rcSwitch;
+};
+
+class RCSwitchReceiver {
+	public:
+		RCSwitchReceiver();
+		~RCSwitchReceiver();
+		void enableReceive(int pin);
+		bool available();
+		void resetAvailable();
+		unsigned long getReceivedValue();
+		
 	protected:
 		RCSwitch *rcSwitch;
 };

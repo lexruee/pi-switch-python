@@ -103,6 +103,36 @@ void RCSwitchSender::setProtocol(int nProtocol, int nPulseLength) {
 
 
 /*
+ * RCSwitchReceiver implementation.
+ */
+ 
+RCSwitchReceiver::RCSwitchReceiver() {
+	this->rcSwitch = new RCSwitch;
+}
+
+
+RCSwitchReceiver::~RCSwitchReceiver() {
+	delete rcSwitch;
+}
+
+void RCSwitchReceiver::enableReceive(int pin) {
+	rcSwitch->enableReceive(pin);
+}
+
+bool RCSwitchReceiver::available() {
+	return rcSwitch->available();
+}
+
+void RCSwitchReceiver::resetAvailable() {
+	rcSwitch->resetAvailable();
+}
+
+unsigned long RCSwitchReceiver::getReceivedValue() {
+	return rcSwitch->getReceivedValue();
+}
+
+
+/*
  * RCSwitchProxy implementation.
  */
 void RCSwitchProxy::init() {
