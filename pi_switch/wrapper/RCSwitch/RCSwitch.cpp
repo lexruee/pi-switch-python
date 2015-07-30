@@ -29,8 +29,10 @@
 
 #include "RCSwitch.h"
 
+#define ZERO 0
+
 #if not defined( RCSwitchDisableReceiving )
-unsigned long RCSwitch::nReceivedValue = NULL;
+unsigned long RCSwitch::nReceivedValue = ZERO;
 unsigned int RCSwitch::nReceivedBitlength = 0;
 unsigned int RCSwitch::nReceivedDelay = 0;
 unsigned int RCSwitch::nReceivedProtocol = 0;
@@ -46,7 +48,7 @@ RCSwitch::RCSwitch() {
   #if not defined( RCSwitchDisableReceiving )
   this->nReceiverInterrupt = -1;
   this->setReceiveTolerance(60);
-  RCSwitch::nReceivedValue = NULL;
+  RCSwitch::nReceivedValue = ZERO;
   #endif
 }
 
@@ -594,8 +596,8 @@ void RCSwitch::enableReceive(int interrupt) {
 
 void RCSwitch::enableReceive() {
   if (this->nReceiverInterrupt != -1) {
-    RCSwitch::nReceivedValue = NULL;
-    RCSwitch::nReceivedBitlength = NULL;
+    RCSwitch::nReceivedValue = ZERO;
+    RCSwitch::nReceivedBitlength = ZERO;
     attachInterrupt(this->nReceiverInterrupt, handleInterrupt, CHANGE);
   }
 }
@@ -609,11 +611,11 @@ void RCSwitch::disableReceive() {
 }
 
 bool RCSwitch::available() {
-  return RCSwitch::nReceivedValue != NULL;
+  return RCSwitch::nReceivedValue != ZERO;
 }
 
 void RCSwitch::resetAvailable() {
-  RCSwitch::nReceivedValue = NULL;
+  RCSwitch::nReceivedValue = ZERO;
 }
 
 unsigned long RCSwitch::getReceivedValue() {
@@ -645,7 +647,7 @@ bool RCSwitch::receiveProtocol1(unsigned int changeCount){
       unsigned long delay = RCSwitch::timings[0] / 31;
       unsigned long delayTolerance = delay * RCSwitch::nReceiveTolerance * 0.01;
 
-      for (int i = 1; i<changeCount ; i=i+2) {
+      for (unsigned long i = 1; i<changeCount ; i=i+2) {
 
           if (RCSwitch::timings[i] > delay-delayTolerance && RCSwitch::timings[i] < delay+delayTolerance && RCSwitch::timings[i+1] > delay*3-delayTolerance && RCSwitch::timings[i+1] < delay*3+delayTolerance) {
             code = code << 1;
@@ -666,13 +668,8 @@ bool RCSwitch::receiveProtocol1(unsigned int changeCount){
       RCSwitch::nReceivedProtocol = 1;
     }
 
-    if (code == 0){
-        return false;
-    }else if (code != 0){
-        return true;
-    }
-
-
+	// return true if code is not zero, otherwise return false
+    return (code != 0);  
 }
 
 bool RCSwitch::receiveProtocol2(unsigned int changeCount){
@@ -681,7 +678,7 @@ bool RCSwitch::receiveProtocol2(unsigned int changeCount){
       unsigned long delay = RCSwitch::timings[0] / 10;
       unsigned long delayTolerance = delay * RCSwitch::nReceiveTolerance * 0.01;
 
-      for (int i = 1; i<changeCount ; i=i+2) {
+      for (unsigned long i = 1; i<changeCount ; i=i+2) {
 
           if (RCSwitch::timings[i] > delay-delayTolerance && RCSwitch::timings[i] < delay+delayTolerance && RCSwitch::timings[i+1] > delay*2-delayTolerance && RCSwitch::timings[i+1] < delay*2+delayTolerance) {
             code = code << 1;
@@ -702,34 +699,30 @@ bool RCSwitch::receiveProtocol2(unsigned int changeCount){
       RCSwitch::nReceivedProtocol = 2;
     }
 
-    if (code == 0){
-        return false;
-    }else if (code != 0){
-        return true;
-    }
-
+    // return true if code is not zero, otherwise return false
+    return (code != 0);  
 }
 
 /** Protocol 3 is used by BL35P02.
  *
  */
 bool RCSwitch::receiveProtocol3(unsigned int changeCount){
+	
+     unsigned long code = 0;
+     unsigned long delay = RCSwitch::timings[0] / PROTOCOL3_SYNC_FACTOR;
+     unsigned long delayTolerance = delay * RCSwitch::nReceiveTolerance * 0.01;
 
-      unsigned long code = 0;
-      unsigned long delay = RCSwitch::timings[0] / PROTOCOL3_SYNC_FACTOR;
-      unsigned long delayTolerance = delay * RCSwitch::nReceiveTolerance * 0.01;
-
-      for (int i = 1; i<changeCount ; i=i+2) {
+     for (unsigned long i = 1; i<changeCount ; i=i+2) {
 
           if  (RCSwitch::timings[i]   > delay*PROTOCOL3_0_HIGH_CYCLES - delayTolerance
-            && RCSwitch::timings[i]   < delay*PROTOCOL3_0_HIGH_CYCLES + delayTolerance
-            && RCSwitch::timings[i+1] > delay*PROTOCOL3_0_LOW_CYCLES  - delayTolerance
-            && RCSwitch::timings[i+1] < delay*PROTOCOL3_0_LOW_CYCLES  + delayTolerance) {
+               && RCSwitch::timings[i]   < delay*PROTOCOL3_0_HIGH_CYCLES + delayTolerance
+               && RCSwitch::timings[i+1] > delay*PROTOCOL3_0_LOW_CYCLES  - delayTolerance
+               && RCSwitch::timings[i+1] < delay*PROTOCOL3_0_LOW_CYCLES  + delayTolerance) {
             code = code << 1;
           } else if (RCSwitch::timings[i]   > delay*PROTOCOL3_1_HIGH_CYCLES - delayTolerance
-                  && RCSwitch::timings[i]   < delay*PROTOCOL3_1_HIGH_CYCLES + delayTolerance
-                  && RCSwitch::timings[i+1] > delay*PROTOCOL3_1_LOW_CYCLES  - delayTolerance
-                  && RCSwitch::timings[i+1] < delay*PROTOCOL3_1_LOW_CYCLES  + delayTolerance) {
+               && RCSwitch::timings[i]   < delay*PROTOCOL3_1_HIGH_CYCLES + delayTolerance
+               && RCSwitch::timings[i+1] > delay*PROTOCOL3_1_LOW_CYCLES  - delayTolerance
+               && RCSwitch::timings[i+1] < delay*PROTOCOL3_1_LOW_CYCLES  + delayTolerance) {
             code+=1;
             code = code << 1;
           } else {
@@ -737,20 +730,18 @@ bool RCSwitch::receiveProtocol3(unsigned int changeCount){
             i = changeCount;
             code = 0;
           }
-      }
-      code = code >> 1;
-      if (changeCount > 6) {    // ignore < 4bit values as there are no devices sending 4bit values => noise
-        RCSwitch::nReceivedValue = code;
-        RCSwitch::nReceivedBitlength = changeCount / 2;
-        RCSwitch::nReceivedDelay = delay;
-        RCSwitch::nReceivedProtocol = 3;
-      }
-
-      if (code == 0){
-        return false;
-      }else if (code != 0){
-        return true;
-      }
+     }
+     code = code >> 1;
+     if (changeCount > 6) {    // ignore < 4bit values as there are no devices sending 4bit values => noise
+       RCSwitch::nReceivedValue = code;
+       RCSwitch::nReceivedBitlength = changeCount / 2;
+       RCSwitch::nReceivedDelay = delay;
+       RCSwitch::nReceivedProtocol = 3;
+    }
+      
+    // return true if code is not zero, otherwise return false
+    return (code != 0);
+	
 }
 
 void RCSwitch::handleInterrupt() {

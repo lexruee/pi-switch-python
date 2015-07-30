@@ -43,10 +43,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #define boolean int
 #endif
 
-#ifndef NULL
-#define NULL 0
-#endif
-
 #ifndef byte
 #define byte char
 #endif
