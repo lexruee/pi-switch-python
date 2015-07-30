@@ -30,7 +30,10 @@ setup(
                     sources = [
                         "pi_switch/wrapper/pi_switch.cpp"
                     ],
-                    libraries = ["boost_python", "wiringPi"])
+                    libraries = ["boost_python", "wiringPi"],
+                    extra_compile_args=[
+                    '-Wno-write-strings'
+                    ])
     ],
     long_description = """\
 Pi Switch
