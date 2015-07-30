@@ -26,7 +26,7 @@ setup(
         "Environment :: Other Environment"
     ],
     ext_modules = [
-        Extension("pi_switch_wrapper",
+        Extension("_pi_switch",
                     sources = [
                         "pi_switch/wrapper/pi_switch.cpp"
                     ],

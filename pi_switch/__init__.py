@@ -1,1 +1,1 @@
-from pi_switch_wrapper import *
+from _pi_switch import *

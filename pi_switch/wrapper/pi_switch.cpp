@@ -48,7 +48,7 @@ struct RCSwitchProxyWrap: RCSwitchProxy, wrapper<RCSwitchProxy> {
 };
 
 
-BOOST_PYTHON_MODULE(pi_switch_wrapper) {
+BOOST_PYTHON_MODULE(_pi_switch) {
   wiringPiSetup();
 
   // map RCSwitchSender class
