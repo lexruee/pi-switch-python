@@ -55,9 +55,9 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #define detachInterrupt(x) do { } while(0)
 
 // map attachInterrupt() to wiringPi equivalent
-#define attachInterrupt(pin, edgeType, handler)		\
+#define attachInterrupt(pin, handler, edgeType)		\
 		do {	 									\
-			wiringPiISR(pin, handler, edgeType);	\
+			wiringPiISR(pin, edgeType, &handler);	\
 		} while(0)									\
 
 
@@ -108,6 +108,10 @@ class RCSwitchReceiver {
 		bool available();
 		void resetAvailable();
 		unsigned long getReceivedValue();
+		unsigned int getReceivedBitlength();
+		unsigned int getReceivedDelay();
+		unsigned int getReceivedProtocol();
+		unsigned int* getReceivedRawdata();
 		
 	protected:
 		RCSwitch *rcSwitch;

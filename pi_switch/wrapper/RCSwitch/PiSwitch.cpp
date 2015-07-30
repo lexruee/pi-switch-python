@@ -131,10 +131,27 @@ unsigned long RCSwitchReceiver::getReceivedValue() {
 	return rcSwitch->getReceivedValue();
 }
 
+unsigned int RCSwitchReceiver::getReceivedDelay() {
+	return rcSwitch->getReceivedDelay();
+}
+
+unsigned int RCSwitchReceiver::getReceivedProtocol() {
+	return rcSwitch->getReceivedProtocol();
+}
+
+unsigned int* RCSwitchReceiver::getReceivedRawdata() {
+	return rcSwitch->getReceivedRawdata();
+}
+
+unsigned int RCSwitchReceiver::getReceivedBitlength() {
+	return rcSwitch->getReceivedBitlength();
+}
+
 
 /*
  * RCSwitchProxy implementation.
  */
+ 
 void RCSwitchProxy::init() {
 	 this->rcSwitch = new RCSwitch;
 }
@@ -148,7 +165,7 @@ void RCSwitchProxy::disableTransmit() {
 	rcSwitch->disableTransmit();
 }
 
-void RCSwitchProxy::destroy(){
+void RCSwitchProxy::destroy() {
 	 delete rcSwitch;
 }
 
@@ -166,15 +183,15 @@ class RCSwitchA: public RCSwitchProxy {
 			this->init();
 		}
 
-		void switchOn(){
+		void switchOn() {
 			rcSwitch->switchOn(cGroupCode, cDeviceCode);
 		}
 
-		void switchOff(){
+		void switchOff() {
 			rcSwitch->switchOff(cGroupCode, cDeviceCode);
 		}
 
-		~RCSwitchA(){
+		~RCSwitchA() {
 			this->destroy();
 			delete[] cGroupCode;
 			delete[] cDeviceCode;
@@ -197,15 +214,15 @@ class RCSwitchB: public RCSwitchProxy {
 			this->init();
 		}
 
-		void switchOn(){
+		void switchOn() {
 			rcSwitch->switchOn(addressCode, channelCode);
 		}
 
-		void switchOff(){
+		void switchOff() {
 			rcSwitch->switchOff(addressCode, channelCode);
 		}
 
-		~RCSwitchB(){
+		~RCSwitchB() {
 			this->destroy();
 		}
 
@@ -218,6 +235,7 @@ class RCSwitchB: public RCSwitchProxy {
 /*
  * RCSwitch type C implementation.
  */
+ 
 class RCSwitchC: public RCSwitchProxy {
 	public:
 		RCSwitchC(std::string family, int groupCode, int deviceCode) {
@@ -227,15 +245,15 @@ class RCSwitchC: public RCSwitchProxy {
 			this->init();
 		}
 
-		void switchOn(){
+		void switchOn() {
 			rcSwitch->switchOn(family[0], groupCode, deviceCode);
 		}
 
-		void switchOff(){
+		void switchOff() {
 			rcSwitch->switchOff(family[0], groupCode, deviceCode);
 		}
 
-		~RCSwitchC(){
+		~RCSwitchC() {
 			this->destroy();
 		}
 
@@ -249,6 +267,7 @@ class RCSwitchC: public RCSwitchProxy {
 /*
  * RCSwitch type D implementation.
  */
+ 
 class RCSwitchD: public RCSwitchProxy {
 	public:
 		RCSwitchD(std::string groupCode, int deviceCode) {
@@ -257,15 +276,15 @@ class RCSwitchD: public RCSwitchProxy {
 			this->init();
 		}
 
-		void switchOn(){
+		void switchOn() {
 			rcSwitch->switchOn(groupCode[0], deviceCode);
 		}
 
-		void switchOff(){
+		void switchOff() {
 			rcSwitch->switchOff(groupCode[0], deviceCode);
 		}
 
-		~RCSwitchD(){
+		~RCSwitchD() {
 			this->destroy();
 		}
 
