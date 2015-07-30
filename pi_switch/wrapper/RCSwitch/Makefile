@@ -1,6 +1,6 @@
 CC=g++
-CFLAGS=-Wall -c
-LDFLAGS=-lwiringPi -lpthread 
+CFLAGS=-Wall -c -Wno-write-strings
+LDFLAGS=-lwiringPi -lpthread
 
 all: PiSwitch.o
 
