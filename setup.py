@@ -4,7 +4,7 @@
 from distutils.core import setup
 from distutils.extension import Extension
 
-VERSION = "0.3.1"
+VERSION = "0.4.0"
 
 setup(
     name="pi_switch",
