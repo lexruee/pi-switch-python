@@ -63,7 +63,6 @@ git clone https://github.com/lexruee/pi-switch-python.git
 cd pi-switch-python
 ```
 
-### Installation
 Install it:
 
 ```bash
