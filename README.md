@@ -14,19 +14,6 @@ This library is a port of the Arduino [rc-switch](http://code.google.com/p/rc-sw
 ## Credits
 Thanks to Gordon Henderson for [WiringPi](http://wiringpi.com/) and the [rc-switch](http://code.google.com/p/rc-switch/) team for the effort for developing such cool libraries!
 
-## Please contribute!
-Please contribute to this repository. Every contribution counts.
-
-You can contribute to this project by
- * improving the documentation
-  * circuits figures
-  * arduino / raspberry pi tutorial etc.
- * starting a github wiki
- * sending pull requests
- * reporting bugs
- * submitting feature requests
-
-
 
 ## Installation
 We need to install the following dependencies:
@@ -329,7 +316,18 @@ switch.switchOff()
 ```
 
 ## Contributing
-Please feel free to contribute or to improve this library (Codebase, Documentation etc.).
+Please feel free to contribute or to improve this library (Codebase, Documentation etc.). Every contribution counts.
+
+You can contribute to this project by
+ * improving the documentation
+  * circuits figures
+  * arduino / raspberry pi tutorial etc.
+ * starting a github wiki
+ * sending pull requests
+ * reporting bugs
+ * submitting feature requests
+
+
 I'm not an expert in this field. I'm just the guy who wrote the glue to port the library for the Python Programming Language :-).
 
 
