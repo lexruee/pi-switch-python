@@ -222,6 +222,45 @@ The default settings of the `RCSwitchSender` can be changed by means of the foll
   * setRepeatTransmit(num)  
 
 
+### RCSwitchReceiver
+
+The `RCSwitchReceiver` class provides a low level method to receive data.
+
+The following example shows how the `RCSwitchReceiver` class is used:
+
+```python
+from pi_switch import RCSwitchReceiver
+
+receiver = RCSwitchReceiver()
+receiver.enableReceive(2) # use wiringPi pin 2
+
+num = 0
+
+while True:
+    received_value = receiver.getReceivedValue()
+
+    if received_value:
+        num += 1
+        print("Received[%s]:" % num)
+        print(received_value)
+        print("%s / %s bit" % (received_value, receiver.getReceivedBitlength()))
+        print("Protocol: %s" % receiver.getReceivedProtocol())
+        print("")
+        receiver.resetAvailable()
+```
+
+The `RCSwitchReceiver` class provides the following methods:
+
+  * enableReceive()
+  * available()
+  * resetAvailable()
+  * getReceivedValue()
+  * getReceivedBitlength()
+  * getReceivedDelay()
+  * getReceivedProtocol()
+
+
+
 ## Switch Types
 
 There are 4 kind of [switch types](http://code.google.com/p/rc-switch/wiki/HowTo_OperateLowCostOutlets) according to the rc-switch wiki page.
