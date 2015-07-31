@@ -353,4 +353,4 @@ I'm not responsible for any hardware damages or other accidents.
 You use this library at your own risk.
 
 ## Changelog
- [Click here](https://github.com/lexruee/pi-switch-python/master/CHANGElOG.md)
+ [Click here](https://github.com/lexruee/pi-switch-python/blob/master/CHANGELOG.md)
