@@ -65,6 +65,17 @@ BOOST_PYTHON_MODULE(_pi_switch) {
     .def("setPulseLength", &RCSwitchSender::setPulseLength)
     .def("setRepeatTransmit", &RCSwitchSender::setRepeatTransmit)
     .def("setProtocol", setProtocol);
+    
+  // map RCSwitchReceiver class
+  class_<RCSwitchReceiver>("RCSwitchReceiver")
+	.def("enableReceive", &RCSwitchReceiver::enableReceive)
+	.def("available", &RCSwitchReceiver::available)
+	.def("resetAvailable", &RCSwitchReceiver::resetAvailable)
+	.def("getReceivedValue", &RCSwitchReceiver::getReceivedValue)
+	.def("getReceivedBitlength", &RCSwitchReceiver::getReceivedBitlength)
+	.def("getReceivedDelay", &RCSwitchReceiver::getReceivedDelay)
+	.def("getReceivedProtocol", &RCSwitchReceiver::getReceivedProtocol);
+	
 
   // map RCSwitchProxy class
   class_<RCSwitchProxyWrap,boost::noncopyable>("RCSwitchProxy")
