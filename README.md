@@ -7,7 +7,7 @@
 Besides that Pi Switch can be used to send data from one Raspberry Pi to
 another using the `RCSwitchSender` and `RCSwitchReceiver` class.
 
-This library is a port of the Arduino [rc-switch](http://code.google.com/p/rc-switch/) library for the Raspberry Pi and the Python Programming Language.
+This library is a wrapper for the Arduino [rc-switch](http://code.google.com/p/rc-switch/) library for the Raspberry Pi and the Python Programming Language.
 
 
 
