@@ -4,8 +4,12 @@
 
 [Pi Switch](https://pypi.python.org/pypi/pi_switch/) is a library for controlling 315/433MHz remote power outlet sockets.
 
-This library is a port of the Arduino [rc-switch](http://code.google.com/p/rc-switch/) library
-for the Raspberry Pi and the Python Programming Language.
+Besides that Pi Switch can be used to send data between from one Raspberry Pi to
+another using the `RCSwitchSender` and `RCSwitchReceiver` class.
+
+This library is a port of the Arduino [rc-switch](http://code.google.com/p/rc-switch/) library for the Raspberry Pi and the Python Programming Language.
+
+
 
 ## Credits
 Thanks to Gordon Henderson for [WiringPi](http://wiringpi.com/) and the [rc-switch](http://code.google.com/p/rc-switch/) team for the effort for developing such cool libraries!
@@ -70,23 +74,6 @@ git clone https://github.com/lexruee/pi-switch-python.git
 
 ```bash
 cd pi-switch-python
-```
-
-### Testing
-If you just want to test it run the build command:
-
-```bash
-sudo python setup.py build
-```
-
-Change the directory:
-```bash
-cd build/lib.linux-armv6l-2.7
-```
-
-Run python and import ```pi_switch```:
-```bash
-sudo python
 ```
 
 ### Installation
