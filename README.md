@@ -222,7 +222,7 @@ The default settings of the `RCSwitchSender` can be changed by means of the foll
   * setRepeatTransmit(num)  
 
 
-### RCSwitchReceiver
+## RCSwitchReceiver
 
 The `RCSwitchReceiver` class provides a low level method to receive data.
 
