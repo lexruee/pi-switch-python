@@ -3,12 +3,10 @@
 [![PyPI](https://img.shields.io/pypi/v/pi_switch.svg)]()
 
 [Pi Switch](https://pypi.python.org/pypi/pi_switch/) is a library for controlling 315/433MHz remote power outlet sockets.
+This library is a Python wrapper for the Arduino [rc-switch](http://code.google.com/p/rc-switch/) library for the Raspberry Pi.
 
-Besides that Pi Switch can be used to send data from one Raspberry Pi to
-another using the `RCSwitchSender` and `RCSwitchReceiver` class.
-
-This library is a wrapper for the Arduino [rc-switch](http://code.google.com/p/rc-switch/) library for the Raspberry Pi and the Python Programming Language.
-
+Besides that Pi Switch can be used to send data from one Raspberry Pi
+to another using the `RCSwitchSender` and `RCSwitchReceiver` class.
 
 
 ## Credits
@@ -20,7 +18,7 @@ We need to install the following dependencies:
 
 - wiringPi
 - python boost
-- python-dev header files
+- python-dev
 - python-pip
 
 Install [wiring pi](http://wiringpi.com/download-and-install/):
@@ -68,8 +66,6 @@ Install it:
 ```bash
 sudo python setup.py install
 ```
-
-
 
 
 ## Usage
@@ -161,7 +157,8 @@ while True:
             print("%s / %s bit" % (received_value, receiver.getReceivedBitlength()))
             print("Protocol: %s" % receiver.getReceivedProtocol())
             print("")
-            receiver.resetAvailable()
+
+        receiver.resetAvailable()
 ```
 
 The `RCSwitchReceiver` class provides the following methods:
@@ -319,16 +316,6 @@ while True:
 
 ## Contributing
 Please feel free to contribute or to improve this library (Codebase, Documentation etc.). Every contribution counts.
-
-You can contribute to this project by
- * improving the documentation
-  * circuits figures
-  * arduino / raspberry pi tutorial etc.
- * starting a github wiki
- * sending pull requests
- * reporting bugs
- * submitting feature requests
-
 
 I'm not an expert in this field. I'm just the guy who wrote the glue to port the library for the Python Programming Language :-).
 
