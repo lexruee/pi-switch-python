@@ -23,4 +23,5 @@ while True:
             print("%s / %s bit" % (received_value, receiver.getReceivedBitlength()))
             print("Protocol: %s" % receiver.getReceivedProtocol())
             print("")
-            receiver.resetAvailable()
+
+        receiver.resetAvailable()
