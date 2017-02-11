@@ -32,8 +32,8 @@ License along with this library; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#include "PiSwitch.h"
-#include "RCSwitch.cpp"
+#include "./PiSwitch.h"
+#include "./rc-switch/RCSwitch.h"
 
 /*
  * This file provides Proxy classes for all available RCSwitch types:
@@ -173,122 +173,92 @@ void RCSwitchProxy::destroy() {
 /*
  * RCSwitch type A implementation.
  */
-class RCSwitchA: public RCSwitchProxy {
-	public:
-		RCSwitchA(std::string groupCode, std::string deviceCode){
-			cDeviceCode = new char[deviceCode.length()+1];
-			cGroupCode = new char[groupCode.length()+1];
-			std::strcpy(cDeviceCode, deviceCode.c_str());
-			std::strcpy(cGroupCode, groupCode.c_str());
-			this->init();
-		}
+RCSwitchA::RCSwitchA(std::string groupCode, std::string deviceCode){
+    cDeviceCode = new char[deviceCode.length()+1];
+    cGroupCode = new char[groupCode.length()+1];
+	std::strcpy(cDeviceCode, deviceCode.c_str());
+	std::strcpy(cGroupCode, groupCode.c_str());
+	this->init();
+}
 
-		void switchOn() {
-			rcSwitch->switchOn(cGroupCode, cDeviceCode);
-		}
+void RCSwitchA::switchOn() {
+	rcSwitch->switchOn(cGroupCode, cDeviceCode);
+}
 
-		void switchOff() {
-			rcSwitch->switchOff(cGroupCode, cDeviceCode);
-		}
+void RCSwitchA::switchOff() {
+	rcSwitch->switchOff(cGroupCode, cDeviceCode);
+}
 
-		~RCSwitchA() {
-			this->destroy();
-			delete[] cGroupCode;
-			delete[] cDeviceCode;
-		}
-
-	private:
-		char *cGroupCode;
-		char *cDeviceCode;
-};
+RCSwitchA::~RCSwitchA() {
+	this->destroy();
+	delete[] cGroupCode;
+	delete[] cDeviceCode;
+}
 
 
 /*
  * RCSwitch type B implementation.
  */
-class RCSwitchB: public RCSwitchProxy {
-	public:
-		RCSwitchB(int addressCode, int channelCode) {
-			this->addressCode = addressCode;
-			this->channelCode = channelCode;
-			this->init();
-		}
+RCSwitchB::RCSwitchB(int addressCode, int channelCode) {
+	this->addressCode = addressCode;
+	this->channelCode = channelCode;
+	this->init();
+}
 
-		void switchOn() {
-			rcSwitch->switchOn(addressCode, channelCode);
-		}
+void RCSwitchB::switchOn() {
+	rcSwitch->switchOn(addressCode, channelCode);
+}
 
-		void switchOff() {
-			rcSwitch->switchOff(addressCode, channelCode);
-		}
+void RCSwitchB::switchOff() {
+	rcSwitch->switchOff(addressCode, channelCode);
+}
 
-		~RCSwitchB() {
-			this->destroy();
-		}
-
-	private:
-		int addressCode;
-		int channelCode;
-};
+RCSwitchB::~RCSwitchB() {
+	this->destroy();
+}
 
 
 /*
  * RCSwitch type C implementation.
  */
- 
-class RCSwitchC: public RCSwitchProxy {
-	public:
-		RCSwitchC(std::string family, int groupCode, int deviceCode) {
-			this->family = family;
-			this->deviceCode = deviceCode;
-			this->groupCode = groupCode;
-			this->init();
-		}
+RCSwitchC::RCSwitchC(std::string family, int groupCode, int deviceCode) {
+	this->family = family;
+	this->deviceCode = deviceCode;
+	this->groupCode = groupCode;
+	this->init();
+}
 
-		void switchOn() {
-			rcSwitch->switchOn(family[0], groupCode, deviceCode);
-		}
+void RCSwitchC::switchOn() {
+	rcSwitch->switchOn(family[0], groupCode, deviceCode);
+}
 
-		void switchOff() {
-			rcSwitch->switchOff(family[0], groupCode, deviceCode);
-		}
+void RCSwitchC::switchOff() {
+	rcSwitch->switchOff(family[0], groupCode, deviceCode);
+}
 
-		~RCSwitchC() {
-			this->destroy();
-		}
-
-	private:
-		std::string family;
-		int groupCode;
-		int deviceCode;
-};
+RCSwitchC::~RCSwitchC() {
+	this->destroy();
+}
 
 
 /*
  * RCSwitch type D implementation.
  */
- 
-class RCSwitchD: public RCSwitchProxy {
-	public:
-		RCSwitchD(std::string groupCode, int deviceCode) {
-			this->groupCode = groupCode;
-			this->deviceCode = deviceCode;
-			this->init();
-		}
+RCSwitchD::RCSwitchD(std::string groupCode, int deviceCode) {
+	this->groupCode = groupCode;
+	this->deviceCode = deviceCode;
+	this->init();
+}
 
-		void switchOn() {
-			rcSwitch->switchOn(groupCode[0], deviceCode);
-		}
+void RCSwitchD::switchOn() {
+	rcSwitch->switchOn(groupCode[0], deviceCode);
+}
 
-		void switchOff() {
-			rcSwitch->switchOff(groupCode[0], deviceCode);
-		}
+void RCSwitchD::switchOff() {
+	rcSwitch->switchOff(groupCode[0], deviceCode);
+}
 
-		~RCSwitchD() {
-			this->destroy();
-		}
+RCSwitchD::~RCSwitchD() {
+	this->destroy();
+}
 
-	private:
-		std::string groupCode;
-		int deviceCode;
-};

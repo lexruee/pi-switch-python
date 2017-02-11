@@ -4,18 +4,8 @@ Copyright (c) 2015 Alexander Rueedlinger.  All right reserved.
 
 	Project home: https://github.com/lexruee/pi_switch
 
-This library is a port of the RCSwitch - Arduino library.
-	Project home: http://code.google.com/p/rc-switch/
-
-	The RCSwitch team did a great job for providing us such a great
-	library! So thanks to all RCSwitch contributors:
-		- Suat Özgür
-		- Andre Koehler
-		- Gordeev Andrey Vladimirovich
-		- Skineffect
-		- Dominik Fischer
-		- Frank Oltmanns
-		- Andreas Steinel
+This library is a wrapper around the RCSwitch - Arduino library.
+	Project home: https://github.com/sui77/rc-switch
 
 This library is free software; you can redistribute it and/or
 modify it under the terms of the GNU Lesser General Public
@@ -35,33 +25,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #ifndef __PI_SWITCH__
 #define __PI_SWITCH__
 
-// return error code
-#define WIRINGPI_CODES		1
-
-// necessary values to port rc-switch to the raspberry pi
-#ifndef boolean
-#define boolean int
-#endif
-
-#ifndef byte
-#define byte char
-#endif
-
-#ifndef CHANGE
-#define CHANGE INT_EDGE_BOTH
-#endif
-
-// replace detachInterrupt() with a empty block
-#define detachInterrupt(x) do { } while(0)
-
-// map attachInterrupt() to wiringPi equivalent
-#define attachInterrupt(pin, handler, edgeType)		\
-		do {	 									\
-			wiringPiISR(pin, edgeType, &handler);	\
-		} while(0)									\
-
-
-#include "RCSwitch.h"
+#include "./rc-switch/RCSwitch.h"
 #include <string>
 #include <cstring>
 
@@ -80,6 +44,56 @@ class RCSwitchProxy {
 		RCSwitch *rcSwitch;
 		void init();
 		void destroy();
+};
+
+class RCSwitchA: public RCSwitchProxy {
+	public:
+		RCSwitchA(std::string groupCode, std::string deviceCode);
+		void switchOn();
+		void switchOff();
+		~RCSwitchA();
+
+	private:
+		char *cGroupCode;
+		char *cDeviceCode;
+};
+
+class RCSwitchB: public RCSwitchProxy {
+	public:
+		RCSwitchB(int addressCode, int channelCode);
+		void switchOn();
+		void switchOff();
+		~RCSwitchB();
+
+	private:
+		int addressCode;
+		int channelCode;
+};
+
+
+class RCSwitchC: public RCSwitchProxy {
+	public:
+		RCSwitchC(std::string family, int groupCode, int deviceCode);
+		void switchOn();
+		void switchOff();
+		~RCSwitchC();
+
+	private:
+		std::string family;
+		int groupCode;
+		int deviceCode;
+};
+
+class RCSwitchD: public RCSwitchProxy {
+	public:
+		RCSwitchD(std::string groupCode, int deviceCode);
+		void switchOn();
+		void switchOff() ;
+		~RCSwitchD();
+
+	private:
+		std::string groupCode;
+		int deviceCode;
 };
 
 class RCSwitchSender {

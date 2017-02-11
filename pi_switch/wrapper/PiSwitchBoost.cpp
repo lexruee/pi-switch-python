@@ -33,7 +33,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // use boost namespace to avoid lot of typing :-)
 using namespace boost::python;
 
-#include "RCSwitch/PiSwitch.cpp"
+#include "./rc-switch/RCSwitch.h"
+#include "./PiSwitch.h"
 
 // Helper struct to wrap the proxy class. It does the job!
 // Note: RCSwitchProxyWrap MUST BE a struct otherwise it won't work!

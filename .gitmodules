@@ -1,0 +1,3 @@
+[submodule "pi_switch/wrapper/rc-switch"]
+	path = pi_switch/wrapper/rc-switch
+	url = git://github.com/sui77/rc-switch.git
