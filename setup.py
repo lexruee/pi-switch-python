@@ -56,6 +56,8 @@ setup(
 
     entry_points={},
 
+    test_suite='nose2.collector.collector',
+
     description = "Pi Switch is a Python wrapper around the rc-switch library for the Raspberry Pi.",
     author = "Alexander Rüedlinger",
     author_email = "a.rueedlinger@gmail.com",
@@ -63,7 +65,7 @@ setup(
     download_url = "https://github.com/lexruee/pi-switch-python/tarball/%s" % VERSION,
     keywords = ['switch', 'outlet sockets', 'control', 'remote', 'raspberry pi'],
     classifiers = [
-        "License :: OSI Approved :: GNU General Public License v2 (GPLv2)",
+        "License :: OSI Approved :: GNU Lesser General Public License v2 (LGPLv2)",
         "Development Status :: 3 - Alpha",
         "Operating System :: Other OS",
         "Intended Audience :: Developers",
