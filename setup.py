@@ -1,12 +1,20 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from distutils.core import setup
-from distutils.extension import Extension
-from distutils.command.build_ext import build_ext
+import sys
+from setuptools import setup, find_packages
+from setuptools.extension import Extension
+from setuptools.command.build_ext import build_ext
 from distutils.sysconfig import customize_compiler
 
+
 VERSION = "0.5.0.dev"
+
+
+if sys.version_info >= (3,):
+    BOOST_LIB = 'boost_python-py34'
+else:
+    BOOST_LIB = 'boost_python'
 
 
 class CustomBuildExt(build_ext):
@@ -26,9 +34,29 @@ class CustomBuildExt(build_ext):
 
 setup(
     name="pi_switch",
-    packages = [ "pi_switch" ],
     version = VERSION,
-    description = "A Python library for the Raspberry Pi to control remote power sockets using rc-switch.",
+    packages = find_packages(exclude=["*.tests", "*.tests.*", "tests.*", "tests"]),
+    scripts = [],
+    install_requires=[],
+    package_data={},
+
+    cmdclass = {'build_ext': CustomBuildExt},
+    ext_modules = [
+        Extension("_pi_switch",
+                  sources = [
+                      "pi_switch/wrapper/rc-switch/RCSwitch.cpp",
+                      "pi_switch/wrapper/PiSwitch.cpp",
+                      "pi_switch/wrapper/PiSwitchBoost.cpp"
+                  ],
+                  libraries = [BOOST_LIB, "wiringPi"],
+                  extra_compile_args=[
+                      '-DRPI', '-Wall', '-Wno-write-strings'
+                  ])
+    ],
+
+    entry_points={},
+
+    description = "Pi Switch is a Python wrapper around the rc-switch library for the Raspberry Pi.",
     author = "Alexander Rüedlinger",
     author_email = "a.rueedlinger@gmail.com",
     url = "https://github.com/lexruee/pi-switch-python",
@@ -40,29 +68,9 @@ setup(
         "Operating System :: Other OS",
         "Intended Audience :: Developers",
         "Topic :: System :: Hardware",
-        "Programming Language :: Python",
+        "Programming Language :: Python :: 2.7",
+        "Programming Language :: Python :: 3.4",
         "Topic :: Software Development :: Libraries :: Python Modules",
         "Environment :: Other Environment"
-    ],
-    cmdclass = {'build_ext': CustomBuildExt},
-    ext_modules = [
-        Extension("_pi_switch",
-                    sources = [
-                        "pi_switch/wrapper/rc-switch/RCSwitch.cpp",
-                        "pi_switch/wrapper/PiSwitch.cpp",
-                        "pi_switch/wrapper/PiSwitchBoost.cpp"
-                    ],
-                    libraries = ["boost_python", "wiringPi"],
-                    extra_compile_args=[
-                    '-DRPI', '-Wall', '-Wno-write-strings'
-                    ])
-    ],
-    long_description = """\
-Pi Switch
--------------------------------------
-
-Pi Switch is a library for controlling 315/433MHz remote power sockets.
-
-This library is a wrapper of the Arduino rc-switch library for the Raspberry Pi and the Python Programming Language.
-"""
+    ]
 )
