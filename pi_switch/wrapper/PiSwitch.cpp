@@ -1,21 +1,11 @@
 /*
-PiSwitch - RaspberryPi library for remote control outlet switches
-Copyright (c) 2015 Alexander Rueedlinger.  All right reserved.
+PiSwitch - A Python wrapper around the rc-switch library for the Raspberry Pi
+Copyright (c) 2015-2017 Alexander Rueedlinger.  All right reserved.
 
 	Project home: https://github.com/lexruee/pi_switch
 
-This library is a port of the RCSwitch - Arduino library.
+The source code of rc-switch library can be found at:
 	Project home: http://code.google.com/p/rc-switch/
-
-	The RCSwitch team did a great job for providing us such a great
-	library! So thanks to all RCSwitch contributors:
-		- Suat Özgür
-		- Andre Koehler
-		- Gordeev Andrey Vladimirovich
-		- Skineffect
-		- Dominik Fischer
-		- Frank Oltmanns
-		- Andreas Steinel
 
 This library is free software; you can redistribute it and/or
 modify it under the terms of the GNU Lesser General Public
