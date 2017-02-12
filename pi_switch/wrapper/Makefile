@@ -1,23 +1,18 @@
-PYTHON=python2.7
-PYTHON_BOOST=-lboost_python
+PYTHON=python2.7 # python3.4
+PYTHON_BOOST=-lboost_python #-lboost_python-py34
 CCX=g++
-CXXFLAGS=-DRPI -Wall -c -Wno-write-strings -I/usr/include/$(PYTHON)
+CXXFLAGS=-DRPI -Wall -Wno-write-strings -fPIC -I/usr/include/$(PYTHON)
 LDFLAGS=-lwiringPi -lpthread $(PYTHON_BOOST)
-BINARIES=RCSwitch.o PiSwitch.o PiSwitchBoost.o
+BINARIES=*.o
+LIBS=*.so
 
 
-all: $(BINARIES)
+all: _pi_switch.so
 
-RCSwitch.o:
-	$(CCX) $(CXXFLAGS) rc-switch/RCSwitch.cpp -o RCSwitch.o $(LDFLAGS)
-
-PiSwitch.o: RCSwitch.o
-	$(CCX) $(CXXFLAGS) PiSwitch.cpp -o PiSwitch.o $(LDFLAGS)
-
-PiSwitchBoost.o: PiSwitch.o RCSwitch.o
-	$(CCX) $(CXXFLAGS) PiSwitchBoost.cpp -o PiSwitchBoost.o $(LDFLAGS)
+_pi_switch.so:
+	$(CCX) $(CXXFLAGS) rc-switch/RCSwitch.cpp PiSwitch.cpp PiSwitchBoost.cpp -shared -o _pi_switch.so $(LDFLAGS)
 
 
 .PHONY: clean
 clean:
-	rm -f $(BINARIES)
+	rm -f $(BINARIES) $(LIBS)
