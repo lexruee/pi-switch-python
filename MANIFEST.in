@@ -1,1 +1,2 @@
-graft pi_switch/wrapper/rc-switch
+include wrapper/*.h
+include wrapper/rc-switch/*.h

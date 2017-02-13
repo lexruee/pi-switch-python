@@ -1,6 +1,11 @@
 *.o
 *.so
+*.a
 dist/*
 build/*
 .idea/*
-MANIFEST
+*.egg-info
+*.egg
+.tox/*
+.cache/*
+*.pyc

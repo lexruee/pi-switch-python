@@ -1,16 +1,40 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import sys
+"""
+PiSwitch - A Python wrapper around the rc-switch library for the Raspberry Pi
+Copyright (c) 2015-2017 Alexander Rueedlinger.  All right reserved.
+
+    Project home: https://github.com/lexruee/pi-switch-python
+
+The source code of rc-switch library can be found at:
+    Project home: https://github.com/sui77/rc-switch
+
+This library is free software; you can redistribute it and/or
+modify it under the terms of the GNU Lesser General Public
+License as published by the Free Software Foundation; either
+version 2.1 of the License, or (at your option) any later version.
+
+This library is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public
+License along with this library; if not, write to the Free Software
+Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+"""
+
+import sys, os
 from setuptools import setup, find_packages
 from setuptools.extension import Extension
 from setuptools.command.build_ext import build_ext
+from setuptools.command.test import test
+from setuptools import Command
 from distutils.sysconfig import customize_compiler
+from setuptools.dist import Distribution
 
-
-VERSION = "0.5.0.dev"
-
-
+# detect python version
 if sys.version_info >= (3,):
     BOOST_LIB = 'boost_python-py34'
 else:
@@ -32,47 +56,94 @@ class CustomBuildExt(build_ext):
             pass
         build_ext.build_extensions(self)
 
+
+class CustomCleanCommand(Command):
+    user_options = []
+
+    def initialize_options(self):
+        pass
+
+    def finalize_options(self):
+        pass
+
+    def run(self):
+        os.system('rm -vrf ./build ./dist ./*.egg-info ./*.egg ./*.so')
+
+
+class CustomTestCommand(test):
+
+    def finalize_options(self):
+        test.finalize_options(self)
+        self.test_args = ['--pyargs', 'tests']
+        self.test_suite = True
+
+    def run_tests(self):
+        import pytest
+        err = pytest.main(self.test_args)
+        sys.exit(err)
+
+
+class BinaryDistribution(Distribution):
+
+    def is_pure(self):
+        return False
+
+
+VERSION = "0.5.0.dev"
+
 setup(
     name="pi_switch",
     version = VERSION,
+    license='LGPLv2',
+    platforms='',
+
     packages = find_packages(exclude=["*.tests", "*.tests.*", "tests.*", "tests"]),
+    #package_dir={'':'src'},
     scripts = [],
     install_requires=[],
     package_data={},
 
-    cmdclass = {'build_ext': CustomBuildExt},
+    cmdclass = {
+        'build_ext': CustomBuildExt,
+        'clean': CustomCleanCommand,
+        'test': CustomTestCommand
+    },
     ext_modules = [
         Extension("_pi_switch",
                   sources = [
-                      "pi_switch/wrapper/rc-switch/RCSwitch.cpp",
-                      "pi_switch/wrapper/PiSwitch.cpp",
-                      "pi_switch/wrapper/PiSwitchBoost.cpp"
+                      "wrapper/rc-switch/RCSwitch.cpp",
+                      "wrapper/PiSwitch.cpp",
+                      "wrapper/PiSwitchBoost.cpp"
                   ],
                   libraries = [BOOST_LIB, "wiringPi"],
                   extra_compile_args=[
                       '-DRPI', '-Wall', '-Wno-write-strings'
-                  ])
+                  ],
+                  language="c++")
     ],
 
-    entry_points={},
+    include_package_data = True,
+    distclass=BinaryDistribution,
 
-    test_suite='nose2.collector.collector',
+    entry_points={},
+    tests_require=['pytest'],
 
     description = "Pi Switch is a Python wrapper around the rc-switch library for the Raspberry Pi.",
     author = "Alexander Rüedlinger",
     author_email = "a.rueedlinger@gmail.com",
     url = "https://github.com/lexruee/pi-switch-python",
-    download_url = "https://github.com/lexruee/pi-switch-python/tarball/%s" % VERSION,
+    download_url = "https://github.com/lexruee/pi-switch-python/tarball/{}".format(VERSION),
     keywords = ['switch', 'outlet sockets', 'control', 'remote', 'raspberry pi'],
     classifiers = [
         "License :: OSI Approved :: GNU Lesser General Public License v2 (LGPLv2)",
         "Development Status :: 3 - Alpha",
         "Operating System :: Other OS",
         "Intended Audience :: Developers",
-        "Topic :: System :: Hardware",
         "Programming Language :: Python :: 2.7",
         "Programming Language :: Python :: 3.4",
         "Topic :: Software Development :: Libraries :: Python Modules",
-        "Environment :: Other Environment"
+        "Topic :: System :: Hardware",
+        "Topic :: Home Automation",
+        "Operating System :: POSIX :: Linux"
     ]
 )
