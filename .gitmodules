@@ -1,3 +1,6 @@
 [submodule "wrapper/rc-switch"]
 	path = wrapper/rc-switch
 	url = git://github.com/sui77/rc-switch.git
+[submodule "wrapper/pybind11"]
+	path = wrapper/pybind11
+	url = https://github.com/pybind/pybind11

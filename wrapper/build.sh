@@ -1,0 +1,1 @@
+g++ -DRPI -O3 -shared -fPIC -std=c++11 -I./pybind11/include `python-config --cflags`  rc-switch/RCSwitch.cpp PiSwitch.cpp Binding.cpp -o _pi_switch.so -lwiringPi

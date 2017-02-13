@@ -25,7 +25,8 @@ License along with this library; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 """
 
-import sys, os
+import sys
+import os
 from setuptools import setup, find_packages
 from setuptools.extension import Extension
 from setuptools.command.build_ext import build_ext
@@ -33,12 +34,6 @@ from setuptools.command.test import test
 from setuptools import Command
 from distutils.sysconfig import customize_compiler
 from setuptools.dist import Distribution
-
-# detect python version
-if sys.version_info >= (3,):
-    BOOST_LIB = 'boost_python-py34'
-else:
-    BOOST_LIB = 'boost_python'
 
 
 class CustomBuildExt(build_ext):
@@ -98,9 +93,8 @@ setup(
     platforms='',
 
     packages = find_packages(exclude=["*.tests", "*.tests.*", "tests.*", "tests"]),
-    #package_dir={'':'src'},
     scripts = [],
-    install_requires=[],
+    tests_require=['pytest'],
     package_data={},
 
     cmdclass = {
@@ -113,11 +107,11 @@ setup(
                   sources = [
                       "wrapper/rc-switch/RCSwitch.cpp",
                       "wrapper/PiSwitch.cpp",
-                      "wrapper/PiSwitchBoost.cpp"
+                      "wrapper/Binding.cpp"
                   ],
-                  libraries = [BOOST_LIB, "wiringPi"],
+                  libraries = ["wiringPi"],
                   extra_compile_args=[
-                      '-DRPI', '-Wall', '-Wno-write-strings'
+                      '-std=c++11', '-DRPI', '-Wall', '-Wno-write-strings'
                   ],
                   language="c++")
     ],
@@ -126,7 +120,6 @@ setup(
     distclass=BinaryDistribution,
 
     entry_points={},
-    tests_require=['pytest'],
 
     description = "Pi Switch is a Python wrapper around the rc-switch library for the Raspberry Pi.",
     author = "Alexander Rüedlinger",

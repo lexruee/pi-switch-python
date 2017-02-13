@@ -29,12 +29,15 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include <string>
 #include <cstring>
 
+#define WIRINGPI_CODES 1
+
 /*
  * Abstract RCSwitchProxy class for providing a easier way to use
  * the RCSwitch library.
  */
 class RCSwitchProxy {
 	public:
+	    virtual ~RCSwitchProxy() { }
 		virtual void switchOn() = 0;
 		virtual void switchOff() = 0;
 		void enableTransmit(int);

@@ -1,2 +1,3 @@
 include wrapper/*.h
 include wrapper/rc-switch/*.h
+graft wrapper/pybind11/include
